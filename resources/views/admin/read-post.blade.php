@@ -5,7 +5,7 @@
         <x-alerts.success :success="session('success')" />
     @endif
     <div class="max-w-[95%]  m-auto bg-gray-100 rounded-lg px-4 py-6">
-        <table class="w-full rounded-lg overflow-hidden mb-4">
+        <table class="w-full rounded-lg  mb-4">
             <tr class="bg-gray-800 text-white py-4 px-4">
                 <th class="text-start  p-2">Image</th>
                 <th class="text-start p-2 ">User</th>
@@ -15,7 +15,7 @@
                 <th class="text-end p-2">Delete</th>
             </tr>
             @foreach ($posts as $item)
-                <tr class="text-sm odd:bg-white relative">
+                <tr class="text-sm odd:bg-white">
 
                     <td class="text-start ">
                         @if ($item->image)
@@ -32,7 +32,7 @@
                     </td>
                     <td class="text-end">{{ $item->created_at->diffForHumans() }}</td>
                     <td class="relative flex items-center justify-end" x-data="{ open: false }">
-                        <img class="absolute" x-on:click="open=!open"
+                        <img  x-on:click="open=!open"
                             src="https://api.iconify.design/mdi:dots-vertical.svg?color=%23000000" alt="">
                         <div x-cloak x-transition
                             class="absolute  right-1 z-10 top-2 -translate-x-3 rounded-lg p-3 bg-black shadow-lg"

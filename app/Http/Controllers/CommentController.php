@@ -9,28 +9,44 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function coments(Comment $comment){
+    public function comments()
+    {
         $comments = Comment::all();
      
         return view('admin.read-posts', compact('comments'));
-        
-        
     }
-    
 
-    public function  comment_store(Request $request,Post $post){
-        $this->validate($request,[
-            'content'=>'required',
-        ]);     
-
-        Comment::create([
-            'content'=> $request->content,
-            'user_id'=> Auth::user()->id,
-            'post_id'=> $post->id,
-            'comment_num'=>rand(0,999999999),
+    public function comment_store(Request $request, Post $post)
+    {
+        $this->validate($request, [
+            'content' => 'required',
         ]);
 
-        return back()->with('success','Comment has been posted');
+        Comment::create([
+            'content' => $request->input('content'),
+            'user_id' => Auth::user()->id,
+            'post_id' => $post->id,
+            'comment_num' => rand(0, 999999999),
+        ]);
+
+        return back()->with('success', 'Comment has been posted');
+    }
+
+
+    public function update_comments(Request $request, Comment $comment)
+    {
+        $this->validate($request, [
+            'content' => 'required',
+        ]);
+
+       $array=[
+         'content'=>$request->content,
+       ];
+
+       $comment->update($array);
+
+        return back();
     }
 }
+
 

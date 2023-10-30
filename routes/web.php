@@ -85,3 +85,7 @@ Route::get('len',function(){
 // Comments Route
 
  Route::post('/comments/{post:slug}',[CommentController::class,'comment_store'])->name('comments.store')->middleware('auth');
+
+ // Update Comments
+
+ Route::patch('/comments/{comment:comment_num}', [CommentController::class, 'update_comments'])->name('comments.update');
