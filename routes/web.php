@@ -88,4 +88,4 @@ Route::get('len',function(){
 
  // Update Comments
 
- Route::patch('/comments/{comment:comment_num}', [CommentController::class, 'update_comments'])->name('comments.update');
+ Route::patch('/comments/{comment:comment_num}/{slug}', [CommentController::class, 'update_comments'])->name('comments.update');

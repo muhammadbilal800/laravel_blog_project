@@ -33,7 +33,7 @@ class CommentController extends Controller
     }
 
 
-    public function update_comments(Request $request, Comment $comment)
+    public function update_comments(Request $request, Comment $comment,$slug)
     {
         $this->validate($request, [
             'content' => 'required',
@@ -45,7 +45,9 @@ class CommentController extends Controller
 
        $comment->update($array);
 
-        return back();
+       
+       return redirect()->route('posts',[$slug."#".$comment->comment_num]);
+
     }
 }
 

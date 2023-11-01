@@ -38,8 +38,8 @@
     @endauth
 
     <div class="max-w-lg bg-gray-100 m-auto mt-8">
-        @foreach ($post->comments as $comment)
-            <div class="flex items-center justify-between bg-white p-4 rounded shadow-sm mb-2">
+        @foreach ($post->comments as $key=>$comment)
+            <div class="flex items-center justify-between bg-white p-4 rounded shadow-sm mb-2" id="{{ $comment->comment_num }}" >
                 <div>
                     <p class="font-semibold">{{ $comment->user->name }}</p>
                     @if (auth()->check() && $comment->user_id === auth()->user()->id)
@@ -50,7 +50,7 @@
                                 
                             </div>
                             <div x-cloak  x-show="open">
-                                <form class="flex" action="{{ route('comments.update', $comment->comment_num) }}" method="post">
+                                <form class="flex" action="{{ route('comments.update', [$comment->comment_num,$post->slug]) }}" method="post">
                                     @csrf
                                     @method('PATCH')
                                     <textarea id="comment" rows="1" name="content" placeholder="Update your comment"
