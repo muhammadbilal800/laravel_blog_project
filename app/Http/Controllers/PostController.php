@@ -35,18 +35,7 @@ class PostController extends Controller
             $url=asset('post_images/'.$image);
         }
 
-        // if ($request->hasFile('image')) {
-        //     $originName = $request->file('image')->getClientOriginalName();
-        //     $fileName = pathinfo($originName, PATHINFO_FILENAME);
-        //     $extension = $request->file('image')->getClientOriginalExtension();
-        //     $fileName = $fileName . '_' . time() . '.' . $extension;
-      
-        //     $request->file('store')->move(public_path('post_images'), $fileName);
-      
-        //     $url = asset('post_images/' . $fileName);
-  
-        //     return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
-        // }
+
 
         Post::create([
             'title' => $request->title,
@@ -87,16 +76,11 @@ class PostController extends Controller
         return back();
     } 
 
-    // public function read(Post $post){
-    //     return view('admin.read-posts', [
-    //        'post'=> $post
-            
-    //     ]);
-    // }
+   
     
     public function read(Post $post){
         
-        return view('admin.read-posts', [
+        return view('read-posts', [
            'post'=> $post->load('comments')  
         ]);
     }
@@ -141,8 +125,5 @@ class PostController extends Controller
         $post->update($array);
         return redirect()->route('read.post')->with('success', 'Post has been updated!');
     }
-
-
-
-  
+ 
 }
